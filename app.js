@@ -124,6 +124,10 @@
   // Give the map a starting view right away. A Leaflet map only accepts layers
   // once it has a view. setChapter() zooms to the real area a moment later.
   map.setView([37.5, -79], 5);
+  // Keep the Leaflet credit link but drop the small flag icon Leaflet adds
+  // by default, so the page stays black and white.
+  map.attributionControl.setPrefix(
+    '<a href="https://leafletjs.com" title="A JavaScript library for interactive maps">Leaflet</a>');
   map.getContainer().setAttribute('role', 'region');
   map.getContainer().setAttribute('aria-label',
     'Map of the route. The stop card beside it has the same information in text.');

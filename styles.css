@@ -20,119 +20,120 @@
 /* ---------- 1. Design tokens ------------------------------------------- */
 /* A "token" is a named value reused all over the file. Change it here and it
    changes everywhere. Every text and background pair below was checked
-   against WCAG AA contrast (4.5 to 1 or better for text, 3 to 1 for lines).
+   against WCAG AA contrast (4.5 to 1 or better for text).
 
-   The palette comes from the project slides: aged newsprint and parchment,
-   a leather-bound cover with a gold rule, brown ink and the indigo of a
-   pressed pansy. Ellen is indigo and William is bronze. */
+   The whole site is black, white and gray. Nothing depends on color:
+   Ellen is a circle with a solid line and William is a diamond with a dashed
+   line. The two kinds of state differ by a hatch pattern, and the evidence
+   tags differ by symbol and border style. */
 :root {
   --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --serif: Georgia, "Times New Roman", serif;   /* used only for quoted book text */
 
-  --bg: #efe8d8;            /* aged paper */
-  --surface: #f9f5ea;       /* lighter paper for panels */
-  --text: #2a190d;          /* brown ink */
-  --muted: #6a5841;
-  --border: #cdbd9a;
-  --gold: #b8975a;          /* the thin rule on the book cover */
+  --bg: #f2f2f2;
+  --surface: #ffffff;
+  --text: #111111;
+  --muted: #595959;
+  --border: #a6a6a6;
+  --rule: #111111;          /* the double rule under the header */
 
-  --accent: #5e2f0f;        /* leather brown: main buttons and callout borders */
-  --on-accent: #f9f5ea;
-  --focus: #3a4a8c;         /* keyboard focus ring (pansy indigo) */
+  --accent: #111111;        /* links, main buttons and callout borders */
+  --on-accent: #ffffff;
+  --focus: #111111;         /* keyboard focus ring */
 
-  --ellen: #3a4a8c;         /* Ellen's dot and line (circle) */
-  --on-ellen: #f9f5ea;
-  --ellen-text: #3a4a8c;
-  --william: #7d5a0c;       /* William's dot and line (diamond) */
-  --on-william: #f9f5ea;
-  --william-text: #7d5a0c;
+  --ellen: #111111;         /* Ellen's dot and line (circle, solid line) */
+  --on-ellen: #ffffff;
+  --ellen-text: #111111;
+  --william: #6b6b6b;       /* William's dot and line (diamond, dashed line) */
+  --on-william: #ffffff;
+  --william-text: #595959;
 
-  --pin: #3b2412;           /* numbered stop pins */
-  --on-pin: #f9f5ea;
+  --pin: #111111;           /* numbered stop pins */
+  --on-pin: #ffffff;
 
-  --slave-fill: #d6c294;    /* state shading, "slave state" (hatched tan) */
-  --slave-hatch: #5e2f0f;
-  --free-fill: #c4cbb8;     /* state shading, "free state" (plain faded sage) */
-  --water: #ddd6c4;         /* map background when the tiles do not load */
-  --tile-filter: sepia(0.5) saturate(0.8);   /* ages the map tiles toward the paper */
+  --slave-fill: #bdbdbd;    /* state shading, "slave state" (hatched gray) */
+  --slave-hatch: #111111;
+  --free-fill: #e4e4e4;     /* state shading, "free state" (plain light gray) */
+  --water: #e6e6e6;         /* map background when the tiles do not load */
+  --tile-filter: grayscale(1);   /* turns the map tiles gray */
 
-  --tag-corroborated-bg: #dfe8d2;  --tag-corroborated: #2d5a34;
-  --tag-symbolic-bg: #f1e0b8;      --tag-symbolic: #7a4a00;
-  --tag-unreviewed-bg: #e6dfce;    --tag-unreviewed: #4b4030;
+  --tag-corroborated-bg: #e6e6e6;  --tag-corroborated: #111111;
+  --tag-symbolic-bg: #f2f2f2;      --tag-symbolic: #111111;
+  --tag-unreviewed-bg: #ebebeb;    --tag-unreviewed: #3d3d3d;
 
   --radius: 0.6rem;
 }
 
-/* Dark theme: the leather cover at night. It applies when the visitor's
-   device is set to dark and they have not picked light, and also when the
-   page is told data-theme="dark". Both blocks hold the same values. */
+/* Dark theme. It applies when the visitor's device is set to dark and they
+   have not picked light, and also when the page is told data-theme="dark".
+   Both blocks hold the same values. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #1d1209;
-    --surface: #29190d;
-    --text: #f1e7d3;
-    --muted: #bba98a;
-    --border: #5a4128;
-    --gold: #c8a96b;
+    --bg: #0d0d0d;
+    --surface: #181818;
+    --text: #f2f2f2;
+    --muted: #b3b3b3;
+    --border: #5a5a5a;
+    --rule: #f2f2f2;
 
-    --accent: #e2c88c;
-    --on-accent: #1d1209;
-    --focus: #a9b8ff;
+    --accent: #f2f2f2;
+    --on-accent: #0d0d0d;
+    --focus: #ffffff;
 
-    --ellen: #a9b6f2;
-    --on-ellen: #1d1209;
-    --ellen-text: #a9b6f2;
-    --william: #e0b85c;
-    --on-william: #1d1209;
-    --william-text: #e0b85c;
+    --ellen: #ffffff;
+    --on-ellen: #0d0d0d;
+    --ellen-text: #ffffff;
+    --william: #9a9a9a;
+    --on-william: #0d0d0d;
+    --william-text: #a6a6a6;
 
-    --pin: #d9c9a6;
-    --on-pin: #1d1209;
+    --pin: #d9d9d9;
+    --on-pin: #0d0d0d;
 
-    --slave-fill: #6b4a25;
-    --slave-hatch: #f0dcae;
-    --free-fill: #4a5a46;
-    --water: #2b1f15;
-    --tile-filter: sepia(0.35) saturate(0.8);
+    --slave-fill: #5c5c5c;
+    --slave-hatch: #f2f2f2;
+    --free-fill: #2a2a2a;
+    --water: #1a1a1a;
+    --tile-filter: grayscale(1);
 
-    --tag-corroborated-bg: #213524;  --tag-corroborated: #a9d7ab;
-    --tag-symbolic-bg: #3a2a0f;      --tag-symbolic: #f0c777;
-    --tag-unreviewed-bg: #33281c;    --tag-unreviewed: #cfc2a8;
+    --tag-corroborated-bg: #2a2a2a;  --tag-corroborated: #f2f2f2;
+    --tag-symbolic-bg: #181818;      --tag-symbolic: #f2f2f2;
+    --tag-unreviewed-bg: #222222;    --tag-unreviewed: #cfcfcf;
 
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #1d1209;
-  --surface: #29190d;
-  --text: #f1e7d3;
-  --muted: #bba98a;
-  --border: #5a4128;
-  --gold: #c8a96b;
+  --bg: #0d0d0d;
+  --surface: #181818;
+  --text: #f2f2f2;
+  --muted: #b3b3b3;
+  --border: #5a5a5a;
+  --rule: #f2f2f2;
 
-  --accent: #e2c88c;
-  --on-accent: #1d1209;
-  --focus: #a9b8ff;
+  --accent: #f2f2f2;
+  --on-accent: #0d0d0d;
+  --focus: #ffffff;
 
-  --ellen: #a9b6f2;
-  --on-ellen: #1d1209;
-  --ellen-text: #a9b6f2;
-  --william: #e0b85c;
-  --on-william: #1d1209;
-  --william-text: #e0b85c;
+  --ellen: #ffffff;
+  --on-ellen: #0d0d0d;
+  --ellen-text: #ffffff;
+  --william: #9a9a9a;
+  --on-william: #0d0d0d;
+  --william-text: #a6a6a6;
 
-  --pin: #d9c9a6;
-  --on-pin: #1d1209;
+  --pin: #d9d9d9;
+  --on-pin: #0d0d0d;
 
-  --slave-fill: #6b4a25;
-  --slave-hatch: #f0dcae;
-  --free-fill: #4a5a46;
-  --water: #2b1f15;
-  --tile-filter: sepia(0.35) saturate(0.8);
+  --slave-fill: #5c5c5c;
+  --slave-hatch: #f2f2f2;
+  --free-fill: #2a2a2a;
+  --water: #1a1a1a;
+  --tile-filter: grayscale(1);
 
-  --tag-corroborated-bg: #213524;  --tag-corroborated: #a9d7ab;
-  --tag-symbolic-bg: #3a2a0f;      --tag-symbolic: #f0c777;
-  --tag-unreviewed-bg: #33281c;    --tag-unreviewed: #cfc2a8;
+  --tag-corroborated-bg: #2a2a2a;  --tag-corroborated: #f2f2f2;
+  --tag-symbolic-bg: #181818;      --tag-symbolic: #f2f2f2;
+  --tag-unreviewed-bg: #222222;    --tag-unreviewed: #cfcfcf;
 
   color-scheme: dark;
 }
@@ -207,7 +208,7 @@ html, body { height: 100%; }
   gap: 0.25rem 1rem;
   padding: 0.4rem 1rem;
   background: var(--surface);
-  border-bottom: 4px double var(--gold);   /* the double rule on the book cover */
+  border-bottom: 4px double var(--rule);   /* a double rule */
 }
 
 .site-header h1 { font-size: 1.15rem; }
@@ -474,7 +475,7 @@ html, body { height: 100%; }
 
 .controls { display: grid; grid-template-columns: auto auto auto 1fr; gap: 0.4rem; align-items: center; }
 .controls .btn { min-width: 2.75rem; padding: 0.35rem 0.6rem; }
-.controls input[type="range"] { width: 100%; min-height: 2.75rem; accent-color: var(--accent); margin: 0; }
+.controls input[type="range"] { color: var(--text); width: 100%; min-height: 2.75rem; accent-color: var(--accent); margin: 0; }
 .counter { margin: 0; font-size: 0.85rem; color: var(--muted); }
 
 .card-scroll {
