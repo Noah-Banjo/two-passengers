@@ -55,7 +55,7 @@
   --slave-hatch: #111111;
   --free-fill: #e4e4e4;     /* state shading, "free state" (plain light gray) */
   --water: #e6e6e6;         /* map background when the tiles do not load */
-  --tile-filter: grayscale(1);   /* turns the map tiles gray */
+  --tile-filter: grayscale(1) contrast(0.9) brightness(1.05);   /* turns the map tiles gray and soft */
 
   --tag-corroborated-bg: #e6e6e6;  --tag-corroborated: #111111;
   --tag-symbolic-bg: #f2f2f2;      --tag-symbolic: #111111;
@@ -94,7 +94,7 @@
     --slave-hatch: #f2f2f2;
     --free-fill: #2a2a2a;
     --water: #1a1a1a;
-    --tile-filter: grayscale(1);
+    --tile-filter: grayscale(1) invert(1) contrast(0.85) brightness(0.8);   /* gray, then inverted for dark mode */
 
     --tag-corroborated-bg: #2a2a2a;  --tag-corroborated: #f2f2f2;
     --tag-symbolic-bg: #181818;      --tag-symbolic: #f2f2f2;
@@ -129,7 +129,7 @@
   --slave-hatch: #f2f2f2;
   --free-fill: #2a2a2a;
   --water: #1a1a1a;
-  --tile-filter: grayscale(1);
+  --tile-filter: grayscale(1) invert(1) contrast(0.85) brightness(0.8);
 
   --tag-corroborated-bg: #2a2a2a;  --tag-corroborated: #f2f2f2;
   --tag-symbolic-bg: #181818;      --tag-symbolic: #f2f2f2;
@@ -453,7 +453,7 @@ html, body { height: 100%; }
 }
 .map-note[hidden] { display: none; }
 
-/* The background tiles are tinted toward the paper. */
+/* The background tiles are made gray (and inverted in dark mode). */
 .leaflet-tile-pane { filter: var(--tile-filter); }
 
 /* Leaflet's own attribution box follows our color scheme. */

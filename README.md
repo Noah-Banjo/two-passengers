@@ -138,16 +138,16 @@ The eight stops with `"phase": 2` have a place, a date note and nothing else. Ad
 ## Sources and licenses
 
 - **Map library:** Leaflet 1.9.4, BSD 2-Clause license (copy in `LEAFLET-LICENSE.txt`).
-- **Background tiles:** CARTO's free basemaps, built on OpenStreetMap data. The required attribution shows in the corner of the map. These tiles are free for light use such as a class. If the site ever gets heavy traffic or is used commercially, check CARTO's current terms.
+- **Background tiles:** the standard OpenStreetMap map (`tile.openstreetmap.org`), which needs no account or key. The required credit shows in the corner of the map. OpenStreetMap asks for light use, which a class easily is. If the site ever gets heavy traffic, switch to a tile provider that suits that use. The tiles are colored, and a filter in `styles.css` makes them gray.
 - **State outlines:** US Census Bureau cartographic boundary files (2017 edition), which are public domain. See "Design notes" for how they were obtained.
 - **Fonts:** system fonts only. Nothing is downloaded.
-- **Requests:** the only requests the page makes to another site are the map tile requests to `basemaps.cartocdn.com`. There are no analytics and no cookies.
+- **Requests:** the only requests the page makes to another site are the map tile requests to `tile.openstreetmap.org`. There are no analytics and no cookies.
 
 ## Design notes
 
 Choices behind how the site works. Any of them can be changed.
 
-1. **Basemap.** CARTO's light basemap, and its dark version when a student's device is in dark mode.
+1. **Basemap.** OpenStreetMap's standard map, turned gray by a filter, and inverted in dark mode. The first version used CARTO's free tiles, but CARTO now stamps "API KEY REQUIRED" across tiles requested without an account key, so the site moved to OpenStreetMap.
 2. **State outlines.** The outlines are the Census Bureau's 2017 cartographic boundary files as redistributed in the open source `us-atlas` package. They were converted to GeoJSON, rounded to three decimals and trimmed to the lower 48 states plus the District of Columbia. To use a file straight from the Census Bureau, replace `states.geojson` with a GeoJSON file that has a `name` property on each state.
 3. **Two extra fields, `ellen_role` and `william_role`.** The "Who they appeared to be" layer needs a short label for each person at each stop. They follow the wording on each card where it gives one ("young gentleman", "sick gentleman", "sick young master", "invalid"). Where a card gives no wording the labels carry forward the depot wording, "young planter" for Ellen and "servant" for William. William has no role label at the Macon cottage and neither person has one in Philadelphia. The private labels, "William's wife" and "Ellen's husband", appear at every stop.
 4. **Lines apart, dots joined only when together.** Both lines are drawn apart on every leg, because `stops.json` records no leg where the two shared a space. At stops that have a `together_note` (the Macon cottage and Philadelphia) a short line joins the dots.

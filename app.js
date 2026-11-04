@@ -132,42 +132,18 @@
   map.getContainer().setAttribute('aria-label',
     'Map of the route. The stop card beside it has the same information in text.');
 
-  // Background tiles. CARTO's free basemap (built on OpenStreetMap data) needs
-  // the attribution below. We switch to the dark version in dark mode.
-  const TILE_URLS = {
-    light: 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',
-    dark: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-  };
+  // Background tiles: the standard OpenStreetMap map. It needs no account or
+  // key, but its usage policy asks for light use and a visible credit, which
+  // the attribution below provides. A class of students is well within that.
+  // The tiles are in color, so styles.css turns them gray with a filter (and
+  // inverts them in dark mode), keeping the page black and white.
+  const TILE_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
   const ATTRIBUTION =
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors ' +
-    '&copy; <a href="https://carto.com/attributions">CARTO</a>';
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
-  // Dark mode: the device setting, unless the page has been told which theme
-  // to use with data-theme="light" or data-theme="dark" on the root element.
-  const darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
-  function isDark() {
-    const forced = document.documentElement.getAttribute('data-theme');
-    if (forced === 'dark') return true;
-    if (forced === 'light') return false;
-    return darkQuery.matches;
-  }
-  let tiles = null;
-
-  function setTiles() {
-    if (tiles) map.removeLayer(tiles);
-    tiles = L.tileLayer(isDark() ? TILE_URLS.dark : TILE_URLS.light, {
-      subdomains: 'abcd',
-      maxZoom: 19,
-      attribution: ATTRIBUTION
-    }).addTo(map);
-    // If tiles cannot load (offline, blocked network) say so once.
-    tiles.on('tileerror', () => { $('map-note').hidden = false; });
-  }
-  setTiles();
-  darkQuery.addEventListener('change', setTiles);
-  new MutationObserver(setTiles).observe(document.documentElement, {
-    attributes: true, attributeFilter: ['data-theme']
-  });
+  const tiles = L.tileLayer(TILE_URL, { maxZoom: 19, attribution: ATTRIBUTION }).addTo(map);
+  // If tiles cannot load (offline, blocked network) say so once.
+  tiles.once('tileerror', () => { $('map-note').hidden = false; });
 
   // The map must be told when its box changes size (phone sheet opens, window
   // resizes), otherwise Leaflet draws the wrong area. Until the person moves the
