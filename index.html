@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="An interactive map of William and Ellen Craft's escape from Macon, Georgia to Philadelphia in December 1848, built for a history class.">
+  <title>Two Passengers</title>
+
+  <!-- Leaflet is saved in this folder so the page does not need a CDN. -->
+  <link rel="stylesheet" href="leaflet.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <!-- Lets a keyboard user jump straight to the stop card. -->
+  <a class="sr-only skip-link" href="#card">Skip to the stop card</a>
+
+  <div class="app">
+  <header class="site-header">
+    <div>
+      <h1>Two Passengers</h1>
+      <p class="subtitle">William and Ellen Craft, Macon to Philadelphia, December 1848. After Ilyon Woo, <cite>Master Slave Husband Wife</cite> (2023).</p>
+    </div>
+    <nav class="site-nav" aria-label="Site">
+      <a class="btn" href="conditions.html">What this route required</a>
+    </nav>
+  </header>
+
+  <main class="layout">
+
+    <!-- ===== The map ===== -->
+    <div class="map-wrap">
+      <div id="map"></div>
+
+      <!-- Layers menu. Hidden in projector mode (see styles.css). -->
+      <div class="layers-wrap">
+        <button type="button" class="btn" id="layers-btn" aria-expanded="false" aria-controls="layers-menu">Layers</button>
+        <div class="layers-menu" id="layers-menu" hidden>
+          <label>
+            <input type="checkbox" id="layer-states" checked>
+            <span>Free and slave states in 1848</span>
+          </label>
+          <div class="legend">
+            <span><span class="swatch swatch-slave" aria-hidden="true"></span>Slave state (hatched)</span>
+            <span><span class="swatch swatch-free" aria-hidden="true"></span>Free state (plain)</span>
+            <span>A teaching approximation. Virginia and West Virginia share one shade because West Virginia did not yet exist.</span>
+          </div>
+          <details>
+            <summary>Text list of the slave states</summary>
+            <p id="slave-list"></p>
+          </details>
+
+          <label>
+            <input type="checkbox" id="layer-roles">
+            <span>Who they appeared to be</span>
+          </label>
+          <div class="legend">
+            <span>Labels each dot with the part the person played in public and what the two were to each other in private. Escape chapter only.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Shown only if the map tiles cannot load. -->
+      <p class="map-note" id="map-note" role="status" hidden>The background map could not load. The route and the cards still work.</p>
+    </div>
+
+    <!-- ===== Side panel (a bottom sheet on phones) ===== -->
+    <aside class="panel" id="panel" aria-label="Stop details" data-open="false">
+      <button type="button" class="btn sheet-toggle" id="sheet-toggle" aria-expanded="false" aria-controls="card-scroll">Show more</button>
+
+      <div class="panel-top">
+        <div class="chapters" role="group" aria-label="Chapter">
+          <button type="button" class="btn" id="chapter-1" aria-pressed="true">The escape<br>Macon to Philadelphia</button>
+          <button type="button" class="btn" id="chapter-2" aria-pressed="false">After the escape</button>
+        </div>
+
+        <div class="controls">
+          <button type="button" class="btn" id="prev" aria-label="Previous stop">&larr;</button>
+          <button type="button" class="btn btn-primary" id="play" aria-label="Play through the stops">Play</button>
+          <button type="button" class="btn" id="next" aria-label="Next stop">&rarr;</button>
+          <input type="range" id="slider" min="0" max="13" step="1" value="0" aria-label="Stop">
+        </div>
+        <p class="counter" id="counter"></p>
+      </div>
+
+      <div class="card-scroll" id="card-scroll">
+        <article class="card" id="card" tabindex="-1" aria-labelledby="stop-title">
+          <p class="placeholder">Loading the route.</p>
+        </article>
+      </div>
+    </aside>
+  </main>
+  </div>
+
+  <!-- Screen readers hear this when the stop changes. -->
+  <p class="sr-only" id="status" role="status" aria-live="polite"></p>
+
+  <noscript><p class="page">This map needs JavaScript. The page <a href="conditions.html">What this route required</a> works without it.</p></noscript>
+
+  <script src="leaflet.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

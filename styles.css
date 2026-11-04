@@ -1,0 +1,627 @@
+/* ==========================================================================
+   Two Passengers: styles for index.html and conditions.html
+
+   How this file is organised
+   1. Design tokens (colors, fonts) for light and dark
+   2. Base page rules
+   3. Header and buttons
+   4. Page layout (map plus side panel, or map plus bottom sheet on phones)
+   5. Map pieces: dots, stop pins, labels, layers menu, state shading
+   6. Side panel: chapter buttons, controls, stop card
+   7. Evidence tags and quotes
+   8. Conditions page
+   9. Projector mode and reduced motion
+
+   Color rule: color is never the only signal. Ellen is a circle and William
+   is a diamond. Each evidence tag has its own symbol and border style.
+   ========================================================================== */
+
+
+/* ---------- 1. Design tokens ------------------------------------------- */
+/* A "token" is a named value reused all over the file. Change it here and it
+   changes everywhere. Every text and background pair below was checked
+   against WCAG AA contrast (4.5 to 1 or better for text, 3 to 1 for lines).
+
+   The palette comes from the project slides: aged newsprint and parchment,
+   a leather-bound cover with a gold rule, brown ink and the indigo of a
+   pressed pansy. Ellen is indigo and William is bronze. */
+:root {
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --serif: Georgia, "Times New Roman", serif;   /* used only for quoted book text */
+
+  --bg: #efe8d8;            /* aged paper */
+  --surface: #f9f5ea;       /* lighter paper for panels */
+  --text: #2a190d;          /* brown ink */
+  --muted: #6a5841;
+  --border: #cdbd9a;
+  --gold: #b8975a;          /* the thin rule on the book cover */
+
+  --accent: #5e2f0f;        /* leather brown: main buttons and callout borders */
+  --on-accent: #f9f5ea;
+  --focus: #3a4a8c;         /* keyboard focus ring (pansy indigo) */
+
+  --ellen: #3a4a8c;         /* Ellen's dot and line (circle) */
+  --on-ellen: #f9f5ea;
+  --ellen-text: #3a4a8c;
+  --william: #7d5a0c;       /* William's dot and line (diamond) */
+  --on-william: #f9f5ea;
+  --william-text: #7d5a0c;
+
+  --pin: #3b2412;           /* numbered stop pins */
+  --on-pin: #f9f5ea;
+
+  --slave-fill: #d6c294;    /* state shading, "slave state" (hatched tan) */
+  --slave-hatch: #5e2f0f;
+  --free-fill: #c4cbb8;     /* state shading, "free state" (plain faded sage) */
+  --water: #ddd6c4;         /* map background when the tiles do not load */
+  --tile-filter: sepia(0.5) saturate(0.8);   /* ages the map tiles toward the paper */
+
+  --tag-corroborated-bg: #dfe8d2;  --tag-corroborated: #2d5a34;
+  --tag-symbolic-bg: #f1e0b8;      --tag-symbolic: #7a4a00;
+  --tag-unreviewed-bg: #e6dfce;    --tag-unreviewed: #4b4030;
+
+  --radius: 0.6rem;
+}
+
+/* Dark theme: the leather cover at night. It applies when the visitor's
+   device is set to dark and they have not picked light, and also when the
+   page is told data-theme="dark". Both blocks hold the same values. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d1209;
+    --surface: #29190d;
+    --text: #f1e7d3;
+    --muted: #bba98a;
+    --border: #5a4128;
+    --gold: #c8a96b;
+
+    --accent: #e2c88c;
+    --on-accent: #1d1209;
+    --focus: #a9b8ff;
+
+    --ellen: #a9b6f2;
+    --on-ellen: #1d1209;
+    --ellen-text: #a9b6f2;
+    --william: #e0b85c;
+    --on-william: #1d1209;
+    --william-text: #e0b85c;
+
+    --pin: #d9c9a6;
+    --on-pin: #1d1209;
+
+    --slave-fill: #6b4a25;
+    --slave-hatch: #f0dcae;
+    --free-fill: #4a5a46;
+    --water: #2b1f15;
+    --tile-filter: sepia(0.35) saturate(0.8);
+
+    --tag-corroborated-bg: #213524;  --tag-corroborated: #a9d7ab;
+    --tag-symbolic-bg: #3a2a0f;      --tag-symbolic: #f0c777;
+    --tag-unreviewed-bg: #33281c;    --tag-unreviewed: #cfc2a8;
+
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d1209;
+  --surface: #29190d;
+  --text: #f1e7d3;
+  --muted: #bba98a;
+  --border: #5a4128;
+  --gold: #c8a96b;
+
+  --accent: #e2c88c;
+  --on-accent: #1d1209;
+  --focus: #a9b8ff;
+
+  --ellen: #a9b6f2;
+  --on-ellen: #1d1209;
+  --ellen-text: #a9b6f2;
+  --william: #e0b85c;
+  --on-william: #1d1209;
+  --william-text: #e0b85c;
+
+  --pin: #d9c9a6;
+  --on-pin: #1d1209;
+
+  --slave-fill: #6b4a25;
+  --slave-hatch: #f0dcae;
+  --free-fill: #4a5a46;
+  --water: #2b1f15;
+  --tile-filter: sepia(0.35) saturate(0.8);
+
+  --tag-corroborated-bg: #213524;  --tag-corroborated: #a9d7ab;
+  --tag-symbolic-bg: #3a2a0f;      --tag-symbolic: #f0c777;
+  --tag-unreviewed-bg: #33281c;    --tag-unreviewed: #cfc2a8;
+
+  color-scheme: dark;
+}
+
+
+/* ---------- 2. Base page rules ----------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);   /* explicit, so dark mode never shows white */
+  color: var(--text);
+  font: 1rem/1.55 var(--font);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+h1, h2, h3 { line-height: 1.2; margin: 0; }
+p { margin: 0 0 0.75rem; }
+
+a { color: var(--accent); }
+
+/* The skip link stays hidden until a keyboard user tabs to it. */
+.skip-link:focus {
+  position: fixed;
+  top: 0.5rem; left: 0.5rem;
+  width: auto; height: auto;
+  margin: 0; padding: 0.6rem 0.9rem;
+  clip: auto;
+  background: var(--surface);
+  z-index: 3000;
+}
+
+/* One focus style for everything you can tab to. */
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Text for screen readers only. */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* The map page fills the window and does not scroll as a whole.
+   Only the card inside the side panel scrolls. The page sits inside one
+   wrapper div with the class "app". */
+html, body { height: 100%; }
+
+.app {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+
+/* ---------- 3. Header and buttons -------------------------------------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.4rem 1rem;
+  background: var(--surface);
+  border-bottom: 4px double var(--gold);   /* the double rule on the book cover */
+}
+
+.site-header h1 { font-size: 1.15rem; }
+.site-header .subtitle { margin: 0; color: var(--muted); font-size: 0.85rem; }
+
+.site-nav { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+.btn {
+  font: inherit;
+  font-size: 0.9rem;
+  min-height: 2.75rem;      /* a comfortable touch target */
+  padding: 0.35rem 0.9rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn:hover { border-color: var(--accent); }
+.btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+}
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.btn[disabled] { opacity: 0.55; cursor: not-allowed; }
+
+
+/* ---------- 4. Page layout --------------------------------------------- */
+/* Wide screens: the map on the left and the panel on the right.
+   Phones: the map on top and the panel below it as a "bottom sheet". */
+.layout {
+  flex: 1;
+  min-height: 0;             /* lets children scroll instead of growing */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 31rem);
+}
+
+.map-wrap { position: relative; min-width: 0; min-height: 0; }
+
+#map {
+  position: absolute;
+  inset: 0;
+  isolation: isolate;        /* keeps Leaflet's internal z-index values inside the map */
+  background: var(--water);   /* shows when the background tiles do not load */
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+}
+
+.sheet-toggle { display: none; }
+
+@media (max-width: 599px) {
+  /* Small phones: a slimmer header so the map keeps its room. */
+  .site-header { padding: 0.35rem 0.75rem; }
+  .site-header h1 { font-size: 1.05rem; }
+  .site-header .subtitle { display: none; }
+  .site-nav .btn { min-height: 2.5rem; padding: 0.25rem 0.6rem; font-size: 0.82rem; }
+}
+
+@media (max-width: 899px) {
+  .layout { display: flex; flex-direction: column; }
+  .map-wrap { flex: 1 1 auto; min-height: 9rem; }
+  .panel {
+    flex: 0 0 auto;
+    height: 44vh;
+    height: 44dvh;
+    border-left: 0;
+    border-top: 1px solid var(--border);
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -4px 14px rgb(0 0 0 / 0.18);
+  }
+  /* The sheet grows when the student taps "Show more". */
+  .panel[data-open="true"] { height: 72vh; height: 72dvh; }
+  .sheet-toggle {
+    display: inline-flex;
+    margin: 0.35rem auto 0;
+    min-height: 2.25rem;
+    font-size: 0.8rem;
+  }
+}
+
+
+/* ---------- 5. Map pieces ---------------------------------------------- */
+/* The two moving dots. Leaflet gives each marker a 26 pixel box (see app.js)
+   and positions it with position: absolute, so no extra positioning is needed
+   here. The shape fills that box and the label hangs outside it. */
+.dot-shape {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.55);
+  font: 700 0.8rem/1 var(--font);
+}
+
+.dot-ellen .dot-shape {
+  background: var(--ellen);
+  color: var(--on-ellen);
+  border-radius: 50%;                 /* circle */
+}
+
+.dot-william .dot-shape {
+  background: var(--william);
+  color: var(--on-william);
+  border-radius: 4px;
+  transform: rotate(45deg);           /* diamond */
+}
+.dot-william .dot-letter { transform: rotate(-45deg); }  /* keep the letter upright */
+
+/* The role label is hidden until the "Who they appeared to be" layer is on.
+   JavaScript puts the class .show-roles on the map element. */
+.dot-label {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 11rem;
+  padding: 0.15rem 0.4rem;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.3rem;
+  font: 600 0.72rem/1.25 var(--font);
+  text-align: center;
+  white-space: pre-line;   /* app.js separates the label lines with \n */
+  pointer-events: none;
+}
+.show-roles .dot-label { display: block; }
+.dot-ellen .dot-label { bottom: calc(100% + 6px); border-color: var(--ellen-text); }
+.dot-william .dot-label { top: calc(100% + 10px); border-color: var(--william-text); }
+
+/* Small line that joins the two dots when the card says they are together. */
+.together-line { stroke: var(--text); }
+
+/* Numbered gray pins for each stop. They are buttons, so they can be tabbed to. */
+.stop-pin {
+  display: grid;
+  place-items: center;
+  min-width: 1.4rem;
+  height: 1.4rem;
+  padding: 0 0.25rem;
+  border-radius: 0.7rem;
+  background: var(--pin);
+  color: var(--on-pin);
+  border: 2px solid var(--surface);
+  font: 700 0.7rem/1 var(--font);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.4);
+}
+.stop-place {
+  display: none;
+  position: absolute;
+  left: calc(100% + 24px);   /* clears William's dot, which sits beside the pin */
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0.1rem 0.45rem;
+  white-space: nowrap;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 0.3rem;
+  font: 600 0.75rem/1.3 var(--font);
+  pointer-events: none;
+}
+.is-current-pin .stop-place { display: block; }
+.stop-pin.is-current { outline: 3px solid var(--focus); outline-offset: 1px; }
+.leaflet-marker-icon.stop-marker:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 0.8rem; }
+
+/* State shading. Leaflet draws the states as SVG paths and app.js gives each
+   path a class. CSS can read our color tokens, which a plain SVG attribute
+   cannot, so the colors live here. The "slave" states use a hatch pattern
+   (built in app.js with the id ts-hatch) so the difference is not only a color. */
+.state { stroke: var(--text); stroke-opacity: 0.35; }
+.state-free { fill: var(--free-fill); }
+.state-slave { fill: url(#ts-hatch); }
+.hatch-line { stroke: var(--slave-hatch); stroke-width: 2; }
+.hatch-bg { fill: var(--slave-fill); }
+
+/* Route lines. Ellen is solid and William is dashed (app.js sets the dashes),
+   so the two lines differ by more than color. */
+.route-ellen { stroke: var(--ellen); }
+.route-william { stroke: var(--william); }
+.route-neutral { stroke: var(--text); }
+
+/* Layers menu in the corner of the map. */
+.layers-wrap {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 5;
+  max-width: calc(100% - 1.2rem);
+}
+.layers-wrap > .btn { margin-left: auto; box-shadow: 0 1px 4px rgb(0 0 0 / 0.3); }
+.layers-menu {
+  margin-top: 0.4rem;
+  padding: 0.75rem;
+  width: 17rem;
+  max-width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.3);
+  font-size: 0.9rem;
+}
+.layers-menu[hidden] { display: none; }
+.layers-menu label { display: flex; gap: 0.5rem; align-items: flex-start; min-height: 2.5rem; padding: 0.35rem 0; cursor: pointer; }
+.layers-menu input { width: 1.2rem; height: 1.2rem; margin-top: 0.15rem; flex: none; accent-color: var(--accent); }
+.layers-menu .legend { margin: 0.25rem 0 0.5rem 1.7rem; display: grid; gap: 0.3rem; font-size: 0.82rem; color: var(--muted); }
+.swatch { display: inline-block; width: 1.2rem; height: 0.9rem; border: 1px solid var(--border); vertical-align: -0.1rem; margin-right: 0.4rem; }
+.swatch-slave { background: repeating-linear-gradient(45deg, var(--slave-fill) 0 3px, var(--slave-hatch) 3px 5px); }
+.swatch-free { background: var(--free-fill); }
+.layers-menu details { font-size: 0.82rem; color: var(--muted); margin-left: 1.7rem; }
+.layers-menu summary { cursor: pointer; min-height: 2rem; display: flex; align-items: center; }
+
+.map-note {
+  position: absolute;
+  left: 0.6rem;
+  bottom: 1.8rem;
+  z-index: 5;
+  max-width: 18rem;
+  padding: 0.35rem 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+}
+.map-note[hidden] { display: none; }
+
+/* The background tiles are tinted toward the paper. */
+.leaflet-tile-pane { filter: var(--tile-filter); }
+
+/* Leaflet's own attribution box follows our color scheme. */
+.leaflet-container { font-family: var(--font); }
+.leaflet-control-attribution { background: color-mix(in srgb, var(--surface) 85%, transparent) !important; color: var(--text); }
+.leaflet-control-attribution a { color: var(--accent); }
+
+
+/* ---------- 6. Side panel ---------------------------------------------- */
+.panel-top {
+  padding: 0.5rem 0.9rem 0.6rem;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  gap: 0.5rem;
+}
+
+.chapters { display: flex; gap: 0.4rem; }
+.chapters .btn { flex: 1; font-size: 0.82rem; line-height: 1.2; padding: 0.35rem 0.5rem; text-align: center; }
+
+.controls { display: grid; grid-template-columns: auto auto auto 1fr; gap: 0.4rem; align-items: center; }
+.controls .btn { min-width: 2.75rem; padding: 0.35rem 0.6rem; }
+.controls input[type="range"] { width: 100%; min-height: 2.75rem; accent-color: var(--accent); margin: 0; }
+.counter { margin: 0; font-size: 0.85rem; color: var(--muted); }
+
+.card-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 0.9rem;
+  overscroll-behavior: contain;
+}
+
+.card h2 { font-size: 1.35rem; font-weight: 700; }
+.card .place { margin: 0.2rem 0 0; color: var(--muted); font-size: 0.95rem; }
+.card .when { margin: 0.1rem 0 0.9rem; color: var(--muted); font-size: 0.9rem; }
+.card .when strong { color: var(--text); }
+.card h3 { font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); margin: 1.1rem 0 0.4rem; }
+
+/* One block for each person. The left border and the shape glyph repeat the
+   dot on the map. */
+.person {
+  margin: 0 0 0.6rem;
+  padding: 0.5rem 0.7rem;
+  border-left: 5px solid var(--border);
+  background: color-mix(in srgb, var(--bg) 60%, var(--surface));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.person-ellen { border-left-color: var(--ellen); }
+.person-william { border-left-color: var(--william); border-left-style: double; border-left-width: 6px; }
+.person .name { font-weight: 700; display: flex; gap: 0.4rem; align-items: baseline; }
+.person-ellen .name { color: var(--ellen-text); }
+.person-william .name { color: var(--william-text); }
+.glyph-ellen, .glyph-william { display: inline-block; width: 0.8rem; height: 0.8rem; background: currentColor; flex: none; }
+.glyph-ellen { border-radius: 50%; }
+.glyph-william { transform: rotate(45deg) scale(0.85); }
+.person p { margin: 0.2rem 0 0; }
+.person .role { font-size: 0.85rem; color: var(--muted); margin: 0.15rem 0 0; }
+
+.together {
+  padding: 0.5rem 0.7rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  margin: 0 0 0.6rem;
+}
+.together strong { display: block; font-size: 0.8rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--muted); }
+
+.claims { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.8rem; }
+.claim p { margin: 0.3rem 0 0; }
+
+.placeholder { color: var(--muted); font-style: italic; }
+
+
+/* ---------- 7. Evidence tags and quotes ---------------------- */
+/* Three tags. Each has its own symbol and border style, plus a text label. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  border: 2px solid currentColor;
+}
+.tag-symbol { font-size: 0.9rem; }
+.tag-corroborated { background: var(--tag-corroborated-bg); color: var(--tag-corroborated); border-style: solid; }
+.tag-crafts_symbolic { background: var(--tag-symbolic-bg); color: var(--tag-symbolic); border-style: dashed; }
+.tag-unreviewed { background: var(--tag-unreviewed-bg); color: var(--tag-unreviewed); border-style: dotted; }
+
+blockquote.quote {
+  margin: 0.4rem 0 0;
+  padding: 0.3rem 0 0.3rem 0.8rem;
+  border-left: 3px solid var(--border);
+  font-family: var(--serif);
+  font-style: italic;
+}
+/* The curly quotation marks come from CSS, so the text in the page is exactly
+   the text in stops.json. */
+blockquote.quote p { margin: 0; }
+blockquote.quote p::before { content: "\201C"; }
+blockquote.quote p::after { content: "\201D"; }
+blockquote.quote cite { display: block; font-size: 0.8rem; font-style: normal; color: var(--muted); }
+
+.reveal {
+  margin: 0 0 0.9rem;
+  padding: 0.7rem 0.9rem;
+  border-left: 5px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 7%, var(--surface));
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+.reveal h3 { margin-top: 0; color: var(--accent); }
+.reveal p { margin: 0.3rem 0 0; }
+
+
+/* ---------- 9. Conditions page ----------------------------------------- */
+.page { max-width: 44rem; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+.page h1 { font-size: 1.9rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+/* The diagram is an ordered list. A line runs down the left side and each
+   numbered circle sits on it. Screen readers just hear a numbered list. */
+.spine { list-style: none; margin: 1.5rem 0; padding: 0; position: relative; }
+.spine::before {
+  content: "";
+  position: absolute;
+  left: 1.2rem;
+  top: 1.2rem;
+  bottom: 1.2rem;
+  width: 3px;
+  background: var(--border);
+}
+.spine li { position: relative; margin: 0 0 1rem; padding-left: 3.6rem; }
+.step-num {
+  position: absolute;
+  left: 0; top: 0;
+  width: 2.4rem; height: 2.4rem;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  border: 3px solid var(--bg);
+  font-weight: 700;
+}
+.step-card { padding: 0.7rem 0.9rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.step-card h2 { font-size: 1.1rem; margin-bottom: 0.3rem; }
+.step-card p { margin: 0.3rem 0 0; }
+.step-card .branch {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px dashed var(--border);
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.back-link { display: inline-block; margin-bottom: 1rem; }
+.page-end { margin-top: 1.5rem; }
+
+
+/* ----------  9. Projector mode and reduced motion ---------------------- */
+/* ?projector=1 adds the class "projector" to <html>. Everything is sized in
+   rem, so one font-size change scales the whole page. */
+html.projector { font-size: 125%; }
+html.projector .layers-wrap { display: none; }
+html.projector .layout { grid-template-columns: minmax(0, 1fr) minmax(26rem, 38rem); }
+html.projector .dot-label { font-size: 0.85rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

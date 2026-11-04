@@ -1,0 +1,14 @@
+{
+  "tags": {
+    "corroborated": {
+      "label": "Corroborated",
+      "symbol": "✓",
+      "text": "Other records, such as newspapers, confirm this."
+    },
+    "crafts_symbolic": {
+      "label": "Crafts' account, symbolic",
+      "symbol": "◇",
+      "text": "Only the Crafts tell this scene and nothing else confirms it, but Woo keeps it because it points to a real danger."
+    }
+  }
+}

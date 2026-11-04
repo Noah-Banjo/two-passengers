@@ -1,0 +1,299 @@
+[
+  {
+    "id": "macon-cottage", "order": 1, "phase": 1,
+    "title": "The cottage in Macon", "place": "Macon, Georgia",
+    "lat": 32.8407, "lon": -83.6324,
+    "date": "1848-12-20", "date_note": "Day 1, predawn (Woo's heading)",
+    "ellen": "Dresses as a young gentleman. Woo says the name she would use on the journey was William Johnston (or Johnson).",
+    "william": "Goes ahead of her to the station.",
+    "ellen_role": "young gentleman",
+    "william_role": null,
+    "together_note": "Husband and wife. They kneel and pray before they leave.",
+    "claims": [
+      { "text": "The couple had only four days to prepare.", "evidence": "unreviewed", "quote": "Four days of stuffing clothing into locked compartments, sewing, shopping, mapping the way.", "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why would a disguise be made from ordinary clothes and bandages and not from something more dramatic?"
+  },
+  {
+    "id": "macon-depot", "order": 2, "phase": 1,
+    "title": "The Macon depot", "place": "Macon, Georgia",
+    "lat": 32.8407, "lon": -83.6324,
+    "date": "1848-12-20", "date_note": "Day 1, morning",
+    "ellen": "At the ticket window as a young planter traveling with his slave. Her face is covered by a poultice, tinted glasses and a tall hat. Her right arm is in a sling.",
+    "william": "Waits in the Negro car and sees his employer, the cabinetmaker, at the ticket window.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "William's employer arrived at the station looking for him.", "evidence": "unreviewed", "quote": "It was William's employer, known to him since childhood, scanning the throng as he approached the cars.", "page": null },
+      { "text": "Ellen was not made to sign her name because of her sling.", "evidence": "unreviewed", "quote": "from the look of her arm and her troubled bearing that Mr. Johnson was disabled", "page": null }
+    ],
+    "predict": {
+      "prompt": "A man who has known William since childhood is pushing through the crowd on the platform. Ellen is at the ticket window and must ask for two tickets in a voice that is not hers. What props or habits could she use?",
+      "reveal": "Woo says Ellen asked for passage in a low voice she had rehearsed. Her face was nearly hidden by the poultices, glasses and hat. The ticket seller saw 'a sickly young man of privilege.' He did not make her sign her name."
+    },
+    "student_question": "What did the sling solve that the glasses and the hat could not?"
+  },
+  {
+    "id": "gordon", "order": 3, "phase": 1,
+    "title": "A man who knew her as a child", "place": "On the train near Gordon, Georgia",
+    "lat": 32.8830, "lon": -83.3300,
+    "date": "1848-12-20", "date_note": "Day 1; coordinates are approximate",
+    "ellen": "Sits beside Scott Cray, who has known her since childhood. He speaks to her.",
+    "william": "In the Negro car.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Ellen ignored Cray and acted as if she could not hear him.", "evidence": "unreviewed", "quote": "pretending to be deaf", "page": null },
+      { "text": "Another passenger gave Cray a reason to stop.", "evidence": "unreviewed", "quote": "a very great deprivation to be deaf", "page": null }
+    ],
+    "predict": {
+      "prompt": "The old man sitting next to you knew you as a child. He says hello. He says it again. What do you do?",
+      "reveal": "Ellen pretended to be deaf. Another traveler called deafness 'a very great deprivation,' and Cray left her alone. Cray got off at Gordon."
+    },
+    "student_question": "The other passengers were being polite. Why did their politeness protect her?"
+  },
+  {
+    "id": "savannah", "order": 4, "phase": 1,
+    "title": "The House of Strangers", "place": "Savannah, Georgia",
+    "lat": 32.0809, "lon": -81.0912,
+    "date": "1848-12-20", "date_note": "Day 1, evening",
+    "ellen": "Stays on the omnibus so that she will not have to sign or talk.",
+    "william": "Goes into the Pulaski House through the servants' doors to fetch tea.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Woo calls the Pulaski House Savannah's original 'House of Strangers.'", "evidence": "unreviewed", "quote": "House of Strangers", "page": null },
+      { "text": "Woo says enslaved people were being trafficked on the steamer General Clinch that week. The Crafts also describe a slave trader aboard. Woo cannot corroborate that scene but keeps it because it points to a real danger.", "evidence": "crafts_symbolic", "quote": "At least two groups of enslaved people were trafficked aboard this vessel during the week of the Crafts' flight", "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why did William and Ellen use different doors at the same hotel?"
+  },
+  {
+    "id": "charleston", "order": 5, "phase": 1,
+    "title": "A city Ellen already knew", "place": "Charleston, South Carolina",
+    "lat": 32.7765, "lon": -79.9311,
+    "date": "1848-12-21", "date_note": "Day 2, morning",
+    "ellen": "Back in a city where she once lived with the Collins family. She knows what it can do.",
+    "william": "Plays her servant.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Ellen knew the city's Sugar House, a place of punishment.", "evidence": "unreviewed", "quote": "Charleston's infamous Sugar House, a house of torture where the enslaved were sent for punishment", "page": null },
+      { "text": "The Crafts mention a man fleeing slavery who had been captured on the steamship line they planned to use. A local paper confirms this.", "evidence": "corroborated", "quote": null, "page": null },
+      { "text": "The scene of the enslaved man Pompey is one the Crafts tell but Woo cannot corroborate. She keeps it because it points to real dangers of this stage.", "evidence": "crafts_symbolic", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "How is passing through a city you know different from passing through a city you do not?"
+  },
+  {
+    "id": "wilmington", "order": 6, "phase": 1,
+    "title": "Steamer to Wilmington", "place": "Wilmington, North Carolina",
+    "lat": 34.2257, "lon": -77.9447,
+    "date": null, "date_note": "Departed Charleston on Day 2; arrival expected in the early hours after. Approximate.",
+    "ellen": "Travels as a sick gentleman.",
+    "william": "Plays her servant.",
+    "ellen_role": "sick gentleman",
+    "william_role": "servant",
+    "claims": [
+      { "text": "The steamer left at three o'clock with arrival in Wilmington expected in the early hours of the morning.", "evidence": "unreviewed", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why would a steamer be a good place and a bad place to hide?"
+  },
+  {
+    "id": "petersburg", "order": 7, "phase": 1,
+    "title": "The car for invalids", "place": "Petersburg, Virginia",
+    "lat": 37.2279, "lon": -77.4019,
+    "date": null, "date_note": "Approximate",
+    "ellen": "Is invited into a special car because she looks like an invalid. She is glad of the rest, but she learns she will not be alone.",
+    "william": "In another car.",
+    "ellen_role": "invalid",
+    "william_role": "servant",
+    "claims": [
+      { "text": "The railroad invited Ellen into a car set aside for certain passengers.", "evidence": "unreviewed", "quote": "a special car for ladies, families, and invalids", "page": null }
+    ],
+    "predict": null,
+    "student_question": "The railroad set aside a car for invalids. How did that rule help Ellen?"
+  },
+  {
+    "id": "richmond", "order": 8, "phase": 1,
+    "title": "The slave exporting capital", "place": "Richmond, Virginia",
+    "lat": 37.5407, "lon": -77.4360,
+    "date": null, "date_note": "Approximate",
+    "ellen": "A sick young master changing trains.",
+    "william": "Plays her servant.",
+    "ellen_role": "sick young master",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Woo describes Richmond as a city of heightened risk for the Crafts.", "evidence": "unreviewed", "quote": "a city known as the South's slave exporting capital", "page": null },
+      { "text": "The Crafts tell of a lady from Richmond. Woo cannot corroborate the scene but keeps it because it speaks to the heightened risks of the city.", "evidence": "crafts_symbolic", "quote": null, "page": null },
+      { "text": "Woo says Henry 'Box' Brown, who had himself mailed to Philadelphia, took the same route, and that the Crafts' paths would cross his again.", "evidence": "unreviewed", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why would a city that sold people be more dangerous for two people in disguise?"
+  },
+  {
+    "id": "fredericksburg", "order": 9, "phase": 1,
+    "title": "Fredericksburg", "place": "Fredericksburg, Virginia",
+    "lat": 38.3032, "lon": -77.4605,
+    "date": null, "date_note": "Approximate",
+    "ellen": "On the train north.",
+    "william": "Plays her servant.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Black vendors sold cakes and fruit to passengers here.", "evidence": "unreviewed", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "Who else is on this train, and what do they know that Ellen cannot say?"
+  },
+  {
+    "id": "aquia", "order": 10, "phase": 1,
+    "title": "Aquia Landing", "place": "Aquia Creek, Virginia",
+    "lat": 38.4950, "lon": -77.3200,
+    "date": null, "date_note": "Approximate; coordinates are approximate",
+    "ellen": "Transfers to a steamer for Washington.",
+    "william": "Plays her servant.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Woo notes that very few enslaved people traveled this route going north.", "evidence": "unreviewed", "quote": "William and Ellen were among the very few enslaved at this time, to escape in the opposite direction.", "page": null },
+      { "text": "Solomon Northup, a free Black man who had been kidnapped, had been forced through Aquia Landing years earlier.", "evidence": "unreviewed", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why does Woo mention Northup here?"
+  },
+  {
+    "id": "washington", "order": 11, "phase": 1,
+    "title": "The capital", "place": "Washington, DC",
+    "lat": 38.8951, "lon": -77.0364,
+    "date": null, "date_note": "Approximate",
+    "ellen": "Passes through the nation's capital as a sick gentleman.",
+    "william": "Plays her servant.",
+    "ellen_role": "sick gentleman",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Woo writes about what the capital looked like to people in their position.", "evidence": "unreviewed", "quote": "The Crafts passed through Washington, DC, at a time when enslaved men, women, and children were marched in shackles past the Capitol", "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why would the capital of a free country be a dangerous place?"
+  },
+  {
+    "id": "baltimore", "order": 12, "phase": 1,
+    "title": "Baltimore", "place": "Baltimore, Maryland",
+    "lat": 39.2904, "lon": -76.6122,
+    "date": null, "date_note": "Approximate",
+    "ellen": "Keeps the tickets.",
+    "william": "Is given the money and, Woo says, most likely the gun.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "In the dark the couple moved their money because swindlers worked the trains.", "evidence": "unreviewed", "quote": null, "page": null }
+    ],
+    "predict": null,
+    "student_question": "Why would a servant carry the money of a master?"
+  },
+  {
+    "id": "havre", "order": 13, "phase": 1,
+    "title": "Alone on the ferry", "place": "Havre de Grace, Maryland",
+    "lat": 39.5493, "lon": -76.0916,
+    "date": null, "date_note": "Approximate; the last night of the trip",
+    "ellen": "Crosses the Susquehanna by ferry without knowing where William is.",
+    "william": "Asleep in a luggage car that was rolled onto the ferry whole.",
+    "ellen_role": "young planter",
+    "william_role": "servant",
+    "claims": [
+      { "text": "Ellen believed she might have to go on alone.", "evidence": "unreviewed", "quote": "Alone, she would run.", "page": null },
+      { "text": "Other passengers laughed at her.", "evidence": "unreviewed", "quote": "a slaveless master", "page": null },
+      { "text": "A guard told William to leave her once they reached Philadelphia.", "evidence": "unreviewed", "quote": "When you get to Philadelphia, run away and leave that cripple.", "page": null }
+    ],
+    "predict": {
+      "prompt": "You get off the train at a river. Your husband is not with you and the passengers are laughing at a man with no servant. Do you wait for him or go on?",
+      "reveal": "Woo writes that Ellen decided she would go on alone if she had to. William was asleep in the luggage car, which had been loaded onto the ferry whole. When a guard woke him and told him to leave 'that cripple' in Philadelphia, William answered, 'No, sir,' and then, 'I can't promise to do that.'"
+    },
+    "student_question": "What does the guard's word for Ellen tell you about how people saw her?"
+  },
+  {
+    "id": "philadelphia", "order": 14, "phase": 1,
+    "title": "Free soil", "place": "Philadelphia, Pennsylvania",
+    "lat": 39.9526, "lon": -75.1652,
+    "date": "1848-12-24", "date_note": "Sunday. Woo corrects the Crafts' own date of Christmas Day.",
+    "ellen": "Takes off the disguise in a cab and cries.",
+    "william": "Sits beside her.",
+    "ellen_role": null,
+    "william_role": null,
+    "together_note": "Husband and wife, a thousand miles from Macon.",
+    "claims": [
+      { "text": "They arrived on Christmas Eve and not Christmas Day.", "evidence": "corroborated", "quote": "It was Christmas Eve. They were one thousand miles from Macon.", "page": null },
+      { "text": "Ellen's first words once the cab door closed.", "evidence": "unreviewed", "quote": "Thank God, William, we are safe!", "page": null }
+    ],
+    "predict": null,
+    "student_question": "The Crafts wrote 'Christmas Day.' Woo wrote 'Christmas Eve.' How could you decide who is right?"
+  },
+
+  {
+    "id": "boston", "order": 15, "phase": 2,
+    "title": "Boston", "place": "Boston, Massachusetts",
+    "lat": 42.3601, "lon": -71.0589,
+    "date": null, "date_note": "1849 to November 1850. Includes the October 1850 hunt for the Crafts after the Fugitive Slave Act.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "halifax", "order": 16, "phase": 2,
+    "title": "Halifax", "place": "Halifax, Nova Scotia",
+    "lat": 44.6488, "lon": -63.5752,
+    "date": null, "date_note": "November 1850. The Cambria sails for Liverpool.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "liverpool", "order": 17, "phase": 2,
+    "title": "Liverpool", "place": "Liverpool, England",
+    "lat": 53.4084, "lon": -2.9916,
+    "date": null, "date_note": "Arrived December 11, 1850.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "edinburgh", "order": 18, "phase": 2,
+    "title": "Edinburgh", "place": "Edinburgh, Scotland",
+    "lat": 55.9533, "lon": -3.1883,
+    "date": null, "date_note": "Late December 1850 to early 1851.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "london", "order": 19, "phase": 2,
+    "title": "London", "place": "London, England",
+    "lat": 51.5074, "lon": -0.1278,
+    "date": null, "date_note": "1851. The Great Exhibition.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "ockham", "order": 20, "phase": 2,
+    "title": "Ockham, Surrey", "place": "Ockham, Surrey, England",
+    "lat": 51.2686, "lon": -0.4549,
+    "date": null, "date_note": "The Crafts' school. Their son Charles was born in Surrey in 1852. Coordinates are approximate.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "woodville", "order": 21, "phase": 2,
+    "title": "Woodville plantation", "place": "Woodville plantation, Ways Station, near Savannah, Georgia",
+    "lat": 31.9, "lon": -81.3,
+    "date": null, "date_note": "After the Civil War. Coordinates are rough.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  },
+  {
+    "id": "charleston-end", "order": 22, "phase": 2,
+    "title": "Charleston, South Carolina", "place": "Charleston, South Carolina",
+    "lat": 32.7765, "lon": -79.9311,
+    "date": null, "date_note": "William died here on January 27, 1900. Ellen is buried in Georgia.",
+    "ellen": "", "william": "", "ellen_role": null, "william_role": null,
+    "claims": [], "predict": null, "student_question": null
+  }
+]
