@@ -139,7 +139,7 @@ The eight stops with `"phase": 2` have a place, a date note and nothing else. Ad
 
 - **Map library:** Leaflet 1.9.4, BSD 2-Clause license (copy in `LEAFLET-LICENSE.txt`).
 - **Background tiles:** CARTO's free basemaps, built on OpenStreetMap data. The required attribution shows in the corner of the map. These tiles are free for light use such as a class. If the site ever gets heavy traffic or is used commercially, check CARTO's current terms.
-- **State outlines:** US Census Bureau cartographic boundary files (2017 edition), which are public domain. See "Decisions" for how they were obtained.
+- **State outlines:** US Census Bureau cartographic boundary files (2017 edition), which are public domain. See "Design notes" for how they were obtained.
 - **Fonts:** system fonts only. Nothing is downloaded.
 - **Requests:** the only requests the page makes to another site are the map tile requests to `basemaps.cartocdn.com`. There are no analytics and no cookies.
 
